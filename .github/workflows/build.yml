@@ -28,6 +28,12 @@ jobs:
       run: |
         pytest --cov=gh_action_test --cov-config=.coveragerc --cov-report=xml
         coverage report --fail-under=100
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        file: ./coverage.xml
+        name: codecov-umbrella
+        fail_ci_if_error: true
     - name: Install package
       run: python -m pip install .
     - name: Execute sayhi
