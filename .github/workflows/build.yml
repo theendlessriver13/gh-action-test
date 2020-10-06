@@ -20,7 +20,13 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
-      run: python -m pip install --upgrade pip setuptools wheel
+      run: |
+        python -m pip install --upgrade pip setuptools wheel
+        python -m pip install -r requirements-dev.txt
+    - name: Test with pytest get coverage
+      run: |
+        pytest --cov=gh_action_test --cov-config=.coveragerc tests/
+        coverage report --fail-under=100
     - name: Install package
       run: python -m pip install .
     - name: Execute sayhi
