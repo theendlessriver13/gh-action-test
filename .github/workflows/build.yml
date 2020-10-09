@@ -22,14 +22,18 @@ jobs:
         ports:
           - 5432:5432
         # needed because the postgres container does not provide a healthcheck
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
     - uses: actions/checkout@v2
     - name: test postgres
       run: |
         psql --version
-        PGPASSWORD=postgres psql -U postgres
+        PGPASSWORD=postgres psql -h localhost -U postgres < db.sql
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
