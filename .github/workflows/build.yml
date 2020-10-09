@@ -27,7 +27,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: test postgres
-      run: psql --version
+      run: |
+        psql --version
+        PGPASSWORD=postgres psql -U postgres
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
