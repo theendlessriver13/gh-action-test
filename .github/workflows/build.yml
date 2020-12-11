@@ -14,7 +14,7 @@ jobs:
         python-version: [3.6, 3.7, 3.8]
     services:
       postgres:
-        image: timescale/timescaledb
+        image: timescale/timescaledb:1.7.4-pg10
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -33,7 +33,6 @@ jobs:
     - name: docker stuff
       run: |
         docker ps -a
-        docker exec -i postgres echo "Hello from container"
         docker exec -i postgres apt-get install curl
     - uses: actions/checkout@v2
     - name: test postgres
