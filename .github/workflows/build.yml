@@ -33,7 +33,8 @@ jobs:
     - name: docker stuff
       run: |
         docker ps -a
-        docker exec -it postgres echo "Hello from container" && apt-get install curl
+        docker exec -i postgres echo "Hello from container"
+        docker exec -it postgres apt-get install curl
     - uses: actions/checkout@v2
     - name: test postgres
       run: |
