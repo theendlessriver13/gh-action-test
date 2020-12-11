@@ -30,10 +30,6 @@ jobs:
           --name postgres
 
     steps:
-    - name: docker stuff
-      run: |
-        docker ps -a
-        docker exec -i postgres apt-get install curl
     - uses: actions/checkout@v2
     - name: test postgres
       run: |

@@ -1,10 +1,19 @@
+SELECT name FROM pg_available_extensions;
+
+SELECT extname, extversion FROM pg_extension;
+
+CREATE EXTENSION IF NOT EXISTS timescaledb;
+
 CREATE TABLE test (
-    a INT,
+    date TIMESTAMP,
     b DOUBLE PRECISION,
     c TEXT
 );
 
-INSERT INTO test (a, b, c)
-    VALUES (5, 1.2, 'This is Text');
+SELECT create_hypertable('test', 'date');
+
+
+INSERT INTO test (date, b, c)
+    VALUES ('2020-10-31 15:18:00', 1.2, 'This is Text');
 
 SELECT * FROM test;
